@@ -1,3 +1,5 @@
+import { Button } from "~/components/ui/button";
+
 export function headers({
   loaderHeaders,
   parentHeaders,
@@ -48,6 +50,7 @@ export default function Index() {
           </a>
         </li>
       </ul>
+      <Button>blog</Button>
     </main>
   );
 }
