@@ -1,23 +1,23 @@
 import { Link } from "@remix-run/react";
 import type { Frontmatter } from "~/content/posts.server";
 
-type Props = Pick<Frontmatter, "title" | "summary" | "slug" | "formattedDate">;
+type Props = Pick<Frontmatter, "title" | "slug" | "formattedDate" | "tags">;
 
-export const Card = ({ title, summary, slug, formattedDate }: Props) => {
+export const Card = ({ title, slug, formattedDate, tags }: Props) => {
   return (
-    <div>
-      <div className="text-sm text-gray-500 dark:text-gray-400">
-        Published {formattedDate}
-      </div>
-      <span className="text-2xl font-bold text-gray-800 dark:text-gray-200">
-        {title}
-      </span>
-      <p className="text-lg text-gray-600 dark:text-gray-400">{summary}</p>
-      <Link to={`/blog/${slug}`}>
-        <span className="font-medium text-black dark:text-white">
-          Read more
+    <Link
+      to={`/blog/${slug}`}
+      className="flex mt-4 w-full justify-between items-center border-b-2 pb-2"
+    >
+      <div className="flex items-center gap-4">
+        <span className="text-sm text-gray-500 dark:text-gray-400">
+          {formattedDate}
         </span>
-      </Link>
-    </div>
+        <span className="text-base font-semibold ">{title}</span>
+      </div>
+      {tags.map((tag: string) => (
+        <span className="text-sm">{tag}</span>
+      ))}
+    </Link>
   );
 };

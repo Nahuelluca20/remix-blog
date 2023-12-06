@@ -13,15 +13,15 @@ export default function Header() {
             <Link to={"/about"}>About</Link>
           </Button>
         </li>
-        <li>
-          <SwitchToggle />
-        </li>
-        <li>
+        {/* <li>
           <Button asChild variant="ghost" size="icon">
             <Link to={"https://github.com/Nahuelluca20"} target="black">
               <GithubIcon className="h-4 w-4" />
             </Link>
           </Button>
+        </li> */}
+        <li>
+          <SwitchToggle />
         </li>
       </ul>
     </nav>

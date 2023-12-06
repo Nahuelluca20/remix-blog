@@ -18,6 +18,7 @@ import {
 import { LinksFunction } from "@remix-run/react/dist/routeModules";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import { themeSessionResolver } from "./sessions.server";
+import Header from "./components/header";
 
 export const meta: MetaFunction = () => [
   {
@@ -63,7 +64,8 @@ export function App() {
         <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
       </head>
-      <body className="w-full max-w-[824px] p-10 mx-auto">
+      <body className="w-full max-w-[824px] px-2 sm:px-10 py-10 mx-auto">
+        <Header />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
