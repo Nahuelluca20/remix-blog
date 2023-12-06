@@ -15,9 +15,11 @@ export const Card = ({ title, slug, formattedDate, tags }: Props) => {
         </span>
         <span className="text-base font-semibold ">{title}</span>
       </div>
-      {tags.map((tag: string) => (
-        <span className="text-sm">{tag}</span>
-      ))}
+      <div className="flex flex-wrap items-center gap-2">
+        {tags.map((tag: string) => (
+          <span className="text-sm text-muted-foreground">{tag}</span>
+        ))}
+      </div>
     </Link>
   );
 };

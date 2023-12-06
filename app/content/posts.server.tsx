@@ -1,4 +1,5 @@
 import * as postA from "../content/firt-blogpost.mdx";
+import * as postB from "../content/second-blogpost.mdx";
 import { formatDate } from "~/utils/date";
 
 export interface Frontmatter {
@@ -11,7 +12,7 @@ export interface Frontmatter {
   images: string[];
 }
 
-export const POSTS = [postA];
+export const POSTS = [postA, postB];
 
 export const getPostsSortedByDate = () => {
   return POSTS.map(postFromModule).sort((a, b) => (a.date > b.date ? -1 : 1));

@@ -22,7 +22,7 @@ export default function Index() {
   const posts = useLoaderData<typeof loader>();
   return (
     <main className="w-full">
-      <div className="mt-10 border-b-2 pb-2 flex items-center justify-between text-sm text-gray-500 font-semibold">
+      <div className="mt-10 border-b-2 pb-2 flex items-center justify-between text-sm text-muted-foreground font-semibold">
         <div className="flex items-center gap-4">
           <span>date</span>
           <span>title</span>
