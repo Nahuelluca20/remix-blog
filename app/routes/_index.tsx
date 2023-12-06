@@ -1,8 +1,10 @@
 import { json } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 
-import { getPostsSortedByDate } from "~/content/posts.server";
+// import { getPostsSortedByDate } from "~/utils/posts.server";
 import { Card } from "~/components/Card";
+import ListItem from "~/components/list-item";
+import { getBlogPosts } from "~/utils/posts.server";
 
 export function headers() {
   return {
@@ -11,7 +13,7 @@ export function headers() {
 }
 
 export const loader = async () => {
-  const posts = getPostsSortedByDate();
+  const posts = getBlogPosts();
 
   return json({
     posts: posts,
@@ -20,6 +22,7 @@ export const loader = async () => {
 
 export default function Index() {
   const posts = useLoaderData<typeof loader>();
+  console.log(posts);
   return (
     <main className="w-full">
       <div className="mt-10 border-b-2 pb-2 flex items-center justify-between text-sm text-muted-foreground font-semibold">
@@ -31,7 +34,13 @@ export default function Index() {
       </div>
       <div className="w-full">
         {posts?.posts?.map((post) => (
-          <Card {...post} key={post.slug} />
+          <ListItem
+            key={post.slug}
+            date={post.metadata?.date}
+            slug={post.slug}
+            tags={post.metadata?.tags || ""}
+            title={post.metadata.title}
+          />
         ))}
       </div>
     </main>

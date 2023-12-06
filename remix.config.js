@@ -5,8 +5,23 @@ export default {
   ...(process.env.NODE_ENV === "production" ? config : undefined),
   tailwind: true,
   postcss: true,
-  // This works out of the box with the Netlify adapter, but you can
-  // add your own custom config here if you want to.
-  //
-  // See https://remix.run/file-conventions/remix-config
+  mdx: async (filename) => {
+    const [rehypeHighlight, rehypeExternalLinks] = await Promise.all([
+      import("rehype-highlight").then((mod) => mod.default),
+      import("rehype-external-links").then((mod) => mod.default),
+    ]);
+
+    return {
+      rehypePlugins: [
+        rehypeHighlight,
+        (params) =>
+          rehypeExternalLinks({
+            ...params,
+            rel: ["noopener", "noreferrer"],
+            target: "_blank",
+          }),
+      ],
+      remarkPlugins: [],
+    };
+  },
 };

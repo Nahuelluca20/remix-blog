@@ -1,3 +1,12 @@
+import type { LoaderFunctionArgs } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+
+export async function loader({ params }: LoaderFunctionArgs) {
+  return params.slug; // "123"
+}
+
 export default function BlogByslug() {
-  return <div>holis</div>;
+  const param = useLoaderData<typeof loader>();
+
+  return <div>{param}</div>;
 }
