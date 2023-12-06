@@ -2,7 +2,6 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 // import { getPostsSortedByDate } from "~/utils/posts.server";
-import { Card } from "~/components/Card";
 import ListItem from "~/components/list-item";
 import { getBlogPosts } from "~/utils/posts.server";
 
