@@ -29,7 +29,11 @@ function parseFrontmatter(fileContent: string) {
 }
 
 function getMDXFiles(dir: any) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
+  return fs
+    .readdirSync(dir)
+    .filter(
+      (file) => path.extname(file) === ".mdx" || path.extname(file) === ".md"
+    );
 }
 
 function readMDXFile(filePath: any) {

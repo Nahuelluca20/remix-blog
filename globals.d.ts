@@ -4,6 +4,7 @@ declare global {
     NODE_ENV: "development" | "production" | "test";
   }
   interface Process {
+    cwd(): string;
     env: ProcessEnv;
   }
   let process: Process;
