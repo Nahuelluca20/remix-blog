@@ -12,6 +12,7 @@
     "redirects:disable": "shx rm -f public/_redirects"
   },
   "dependencies": {
+    "@mdx-js/esbuild": "^3.0.0",
     "@netlify/functions": "^2.0.0",
     "@netlify/remix-adapter": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",

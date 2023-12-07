@@ -21,7 +21,6 @@ export const loader = async () => {
 
 export default function Index() {
   const posts = useLoaderData<typeof loader>();
-  console.log(posts);
   return (
     <main className="w-full">
       <div className="border-b-2 pb-2 flex items-center justify-between text-sm text-muted-foreground font-semibold">
