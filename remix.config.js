@@ -5,5 +5,6 @@ export default {
   ...(process.env.NODE_ENV === "production" ? config : undefined),
   tailwind: true,
   postcss: true,
-  serverModuleFormat: "esm",
+  // serverModuleFormat: "esm",
+  // serverDependenciesToBundle: ["mdx-bundler"]
 };

@@ -1,24 +1,12 @@
 ---
-title: "ESTE ES EL 1"
+title: "javascript + next"
 summary: "Lorem markdownum sacrorum sanguine ne utque contraria amata dederit, e.
 Oraque est non tetigere; utque Venus."
 date: "2022-08-17"
-tags: ["javascript"]
+tags: ["javascript", "next"]
 ---
 
-## Expers quod differt patientem coepta Lucifer sit
-
-_Lorem_ markdownum sacrorum sanguine ne utque _contraria amata_ dederit, e.
-Oraque est non tetigere; utque Venus. Fine deus spretor propior domuit age:
-maledictaque fiunt, deam pocula, erectus magnasque horrida partimque _seque
-aliquis miserrima_. Terris pulchraque tenetur!
-
-- Tribus effugies unum
-- Transit quibus defunctum postquam tela pennas super
-- Contentusque credo
-
-Tum quod latus sua, litis. Praestem captivo multi **Macareida** denique faciem
-tigridis tristes causa passim videt aeternamque forma.
+## NOSE QUE ES ESTO
 
 ```js
 if (toggle_pop(4 * -2 + -3)) {

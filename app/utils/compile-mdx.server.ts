@@ -3,6 +3,11 @@ import remarkMdxImages from "remark-mdx-images";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { dirname, resolve } from "./fs.server";
+import calculateReadingTime from "reading-time";
+import { singleton } from "./singleton.server";
+import PQueue from "p-queue";
+import { cachified } from "@epic-web/cachified";
+import { lruCache } from "./cache.server";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -53,23 +58,40 @@ export const compileMdx = async ({ source, files }: BundleMdx) => {
     },
   });
 
+  const readingTime = calculateReadingTime(source);
+
   return {
     code,
     frontmatter,
+    readingTime,
   };
 };
 
-// export const compileMdxCached = ({
-//   slug,
-//   source,
-//   files,
-// }: { slug: string } & BundleMdx) => {
-//   const key = `${slug}:compiled`;
-//   const compileMdx = cachified({
-//     key,
-//     cache: lruCache,
-//     getFreshValue: () => compileMdxQueued({ source, files }),
-//   });
+const queue = singleton(
+  "compile-mdx-queue",
+  () =>
+    new PQueue({
+      concurrency: 1,
+      throwOnTimeout: true,
+      timeout: 1000 * 30,
+    })
+);
 
-//   return compileMdx;
-// };
+export const compileMdxQueued = async (
+  ...args: Parameters<typeof compileMdx>
+) => await queue.add(() => compileMdx(...args), { throwOnTimeout: true });
+
+export const compileMdxCached = ({
+  slug,
+  source,
+  files,
+}: { slug: string } & BundleMdx) => {
+  const key = `${slug}:compiled`;
+  const compileMdx = cachified({
+    key,
+    cache: lruCache,
+    getFreshValue: () => compileMdxQueued({ source, files }),
+  });
+
+  return compileMdx;
+};

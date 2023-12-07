@@ -1,23 +1,29 @@
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 
 // import { getPostsSortedByDate } from "~/utils/posts.server";
 import ListItem from "~/components/list-item";
-import { getBlogPosts } from "~/utils/posts.server";
-
-export function headers() {
-  return {
-    "Cache-Control": "public, max-age=60, s-maxage=60",
-  };
-}
+import { getBlogPostsMeta } from "~/utils/blog.server";
+import type { HeadersFunction, MetaFunction } from "@remix-run/node";
 
 export const loader = async () => {
-  const posts = getBlogPosts();
+  const blogPosts = await getBlogPostsMeta();
 
-  return json({
-    posts: posts,
-  });
+  return json(
+    { blogPosts },
+    {
+      headers: {
+        "Cache-Control": "public, max-age=3600",
+        Vary: "Cookie",
+      },
+    }
+  );
 };
+
+export const headers: HeadersFunction = () => ({
+  "Cache-Control": "private, max-age=3600",
+  Vary: "Cookie",
+});
 
 export default function Index() {
   const posts = useLoaderData<typeof loader>();
@@ -31,13 +37,13 @@ export default function Index() {
         <span>tags</span>
       </div>
       <div className="w-full">
-        {posts?.posts?.map((post) => (
+        {posts?.blogPosts?.map((post) => (
           <ListItem
             key={post.slug}
-            date={post.metadata?.date}
+            date={post?.date}
             slug={post.slug}
-            tags={post.metadata?.tags || ""}
-            title={post.metadata.title}
+            tags={post?.tags}
+            title={post.title}
           />
         ))}
       </div>

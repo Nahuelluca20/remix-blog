@@ -1,83 +1,69 @@
+import { json } from "@remix-run/node";
 import type {
+  HeadersFunction,
   LoaderFunctionArgs,
   MetaFunction,
-  HeadersFunction,
-  SerializeFrom,
 } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { getBlogPost } from "../utils/blog.server";
 import { useMdxComponent } from "../utils/mdx";
+import { compileMdxCached } from "../utils/compile-mdx.server";
 
-import * as React from "react";
-
-import { compileMdx } from "~/utils/compile-mdx.server";
-import { getBlogPost } from "~/utils/blog.server";
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Blog | nichtsam" },
+    {
+      name: "description",
+      content: "nichtsam! Sam! Samuel Jensen! Website! Blogs!",
+    },
+  ];
+};
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   if (!params.slug) {
     throw new Error("params.slug is not defined");
   }
 
-  console.log(params.slug);
-
   const slug = params.slug;
+
   const { source, files } = await getBlogPost(slug);
-  // let post = files && (await compileMdx(files));
-  // let title = files?.metadata.title;
-  const bundledBlog = compileMdx({ source, files });
+  const bundledBlog = await compileMdxCached({
+    slug,
+    source,
+    files,
+  });
+  console.log("object", bundledBlog);
 
   if (!bundledBlog) {
-    throw json(
-      {},
-      {
-        status: 404,
-        headers: {},
-      }
-    );
+    throw new Response(null, { status: 404 });
   }
 
   return json(
     { bundledBlog },
     {
       headers: {
-        "Cache-Control": "public,  max-age=120",
+        "Cache-Control": "public, max-age=3600",
+        Vary: "Cookie",
       },
     }
   );
 };
 
-export const headers: HeadersFunction = ({ loaderHeaders }) => {
-  return {
-    "Cache-Control": loaderHeaders.get("Cache-Control")!,
-  };
-};
-
-// export const meta: MetaFunction = ({ data }) => {
-//   if (!data) return {};
-//   let { post } = data as SerializeFrom<typeof loader>;
-
-//   let seoMeta = getSeoMeta({
-//     title: post.frontmatter.meta.title,
-//     description: post.frontmatter.meta.description,
-//   });
-//   return {
-//     ...seoMeta,
-//   };
-// };
-
-// export const links = () => {
-//   let seoLinks = getSeoLinks();
-//   return [...seoLinks];
-// };
+export const headers: HeadersFunction = () => ({
+  "Cache-Control": "private, max-age=3600",
+  Vary: "Cookie",
+});
 
 export default function BlogPost() {
   const { bundledBlog } = useLoaderData<typeof loader>();
-  console.log(bundledBlog);
-  const Component = useMdxComponent(bundledBlog?.code);
+  const Component = useMdxComponent(bundledBlog.code);
+
   return (
-    <article>
-      {/* <h1>{title} </h1> */}
-      <Component />
-    </article>
+    <section className="container flex justify-center py-9">
+      <article className="prose prose-sm dark:prose-invert sm:prose-base lg:prose-lg">
+        <p>{bundledBlog.readingTime.text}</p>
+        <Component />
+      </article>
+    </section>
   );
 }

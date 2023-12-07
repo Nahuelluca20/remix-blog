@@ -10,10 +10,8 @@ export default function ListItem({
   slug: string;
   title: string;
   date: string;
-  tags: string;
+  tags: string[];
 }) {
-  const getArray = JSON.parse(tags);
-
   return (
     <Link
       prefetch="intent"
@@ -25,7 +23,7 @@ export default function ListItem({
         <span className="text-base font-semibold ">{title}</span>
       </div>
       <div className="flex flex-wrap justify-end items-center gap-2">
-        {getArray?.map((tag: string) => (
+        {tags?.map((tag: string) => (
           <Badge key={`tag-${tag}`} className="text-sm font-semibold">
             {tag}
           </Badge>

@@ -75,6 +75,8 @@ export const getBlogPost = async (slug: string) => {
 type PostMeta = {
   slug: string;
   title: string;
+  tags: string[]; // Add tags property
+  date: string; // Add date property
 };
 
 export const getBlogPostsMeta = async () => {
@@ -83,10 +85,12 @@ export const getBlogPostsMeta = async () => {
   const getMeta = async (path: string) => {
     const file = await readFile(path, "utf-8");
     const frontMatter = matter(file);
-    const { title } = frontMatter.data;
+    const { title, tags, date } = frontMatter.data;
 
     return {
       title,
+      tags: tags || [], // Handle cases where tags are not defined
+      date: date || "", // Handle cases where date is not defined
     };
   };
 
