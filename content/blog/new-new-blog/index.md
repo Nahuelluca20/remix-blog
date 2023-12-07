@@ -1,7 +1,7 @@
 ---
 title: Simple blog with remix
 tags: ["remix"]
-date: "7/12/23"
+date: "12/12/23"
 ---
 
 # Building a BLOG with remix
