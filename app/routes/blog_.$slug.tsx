@@ -32,7 +32,6 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     source,
     files,
   });
-  console.log("object", bundledBlog);
 
   if (!bundledBlog) {
     throw new Response(null, { status: 404 });

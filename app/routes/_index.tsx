@@ -31,7 +31,7 @@ export default function Index() {
     <main className="w-full">
       <div className="border-b-2 pb-2 flex items-center justify-between text-sm text-muted-foreground font-semibold">
         <div className="flex items-center gap-4">
-          <span>date</span>
+          <span className="w-[48px]">date</span>
           <span>title</span>
         </div>
         <span>tags</span>

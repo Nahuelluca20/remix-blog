@@ -1,7 +1,7 @@
 ---
 title: Building a Simple Search Engine in Rust
 tags: ["javascript", "next"]
-date: "2022-08-17"
+date: "7/12/23"
 ---
 
 # Building a Simple Search Engine in Rust
@@ -31,7 +31,7 @@ git add
 git commit
 ```
 
-```js
+```javascript
 if (toggle_pop(4 * -2 + -3)) {
   infotainmentOpenIde(
     -5,
