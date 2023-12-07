@@ -5,7 +5,7 @@ import { GithubIcon } from "lucide-react";
 
 export default function Header() {
   return (
-    <nav className="w-full flex-col-reverse md:flex-row gap-2 flex justify-between items-center">
+    <nav className="mb-10 w-full flex-col-reverse md:flex-row gap-2 flex justify-between items-center">
       <Link to={"/"} className="font-bold text-2xl text-center">
         Sider Dev Blog
       </Link>
