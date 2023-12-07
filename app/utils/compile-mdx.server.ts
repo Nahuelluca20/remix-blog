@@ -9,6 +9,8 @@ import PQueue from "p-queue";
 import { cachified } from "@epic-web/cachified";
 import { lruCache } from "./cache.server";
 import { fileURLToPath } from "url";
+import rehypeHighlight from "rehype-highlight";
+import rehypePrettyCode from "rehype-pretty-code";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -36,6 +38,8 @@ export const compileMdx = async ({ source, files }: BundleMdx) => {
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
         rehypeSlug,
+        rehypePrettyCode,
+        [rehypeHighlight],
         [rehypeAutolinkHeadings, { behavior: "wrap" }],
       ];
 

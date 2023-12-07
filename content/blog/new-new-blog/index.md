@@ -8,8 +8,17 @@ date: "7/12/23"
 
 > Remix is a full stack framework based in react
 
-```
-git status
-git add
-git commit
+```js
+import { RemixBrowser } from "@remix-run/react";
+import { startTransition, StrictMode } from "react";
+import { hydrateRoot } from "react-dom/client";
+
+startTransition(() => {
+  hydrateRoot(
+    document,
+    <StrictMode>
+      <RemixBrowser />
+    </StrictMode>
+  );
+});
 ```

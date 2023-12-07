@@ -11,10 +11,10 @@ import { compileMdxCached } from "../utils/compile-mdx.server";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Blog | nichtsam" },
+    { title: "Blog | Sider Dev" },
     {
       name: "description",
-      content: "nichtsam! Sam! Samuel Jensen! Website! Blogs!",
+      content: "Sider Dev! Nahuel! Nahuel Luca! Website! Blogs!",
     },
   ];
 };
@@ -58,7 +58,7 @@ export default function BlogPost() {
   const Component = useMdxComponent(bundledBlog.code);
 
   return (
-    <section className="container flex justify-center py-9">
+    <section className="container flex justify-center py-3">
       <article className="prose prose-sm dark:prose-invert sm:prose-base lg:prose-lg">
         <p>{bundledBlog.readingTime.text}</p>
         <Component />

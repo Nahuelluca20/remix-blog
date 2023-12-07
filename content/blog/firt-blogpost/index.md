@@ -1,7 +1,7 @@
 ---
 title: Building a Simple Search Engine in Rust
 tags: ["javascript", "next"]
-date: "7/12/23"
+date: "3/12/23"
 ---
 
 # Building a Simple Search Engine in Rust
