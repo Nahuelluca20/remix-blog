@@ -1,8 +1,8 @@
 export default function About() {
   return (
-    <div>
+    <div className="px-5">
       <h1 className="text-2xl mb-5 font-bold">About</h1>
-      <div className="space-y-5 text-lg	font-medium text-justify leading-7">
+      <div className="space-y-5 text-lg	font-medium leading-7">
         <p>
           Hello, I'm Nahuel! 👋 I'm a passionate Frontend Developer dedicated to
           crafting captivating web experiences. My expertise lies in leveraging
