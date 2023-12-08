@@ -1,5 +1,5 @@
 import { json } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 
 import ListItem from "~/components/list-item";
 import { getBlogPostsMeta } from "~/utils/blog.server";
