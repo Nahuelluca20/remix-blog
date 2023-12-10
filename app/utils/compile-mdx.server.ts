@@ -12,8 +12,8 @@ import { fileURLToPath } from "url";
 import rehypeHighlight from "rehype-highlight";
 import rehypePrettyCode from "rehype-pretty-code";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(filename);
 
 const root = resolve(__dirname, "../");
 const publicDir = resolve(root, "./public");
