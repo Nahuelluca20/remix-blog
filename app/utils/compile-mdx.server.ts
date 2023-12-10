@@ -13,9 +13,9 @@ import rehypeHighlight from "rehype-highlight";
 import rehypePrettyCode from "rehype-pretty-code";
 
 const filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(filename);
+const dirnameConst = dirname(filename);
 
-const root = resolve(__dirname, "../");
+const root = resolve(dirnameConst, "../");
 const publicDir = resolve(root, "./public");
 
 export interface BundleMdx {

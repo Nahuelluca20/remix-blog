@@ -10,9 +10,9 @@ import matter from "gray-matter";
 import { fileURLToPath } from "url";
 
 const filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(filename);
+const dirnameConst = dirname(filename);
 
-const rootPath = resolve(__dirname, "../");
+const rootPath = resolve(dirnameConst, "../");
 const contentDirPath = resolve(rootPath, "./content");
 const blogDirPath = resolve(contentDirPath, "./blog");
 
