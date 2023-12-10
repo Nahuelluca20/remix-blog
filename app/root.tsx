@@ -23,7 +23,7 @@ import Header from "./components/header";
 export const meta: MetaFunction = () => [
   {
     charset: "utf-8",
-    title: "Siver Dev Blog",
+    title: "Sider Dev Blog",
     viewport: "width=device-width,initial-scale=1",
   },
 ];
